@@ -31,8 +31,9 @@ namespace AvaloniaVS.IntelliSense
                 var sw = Stopwatch.StartNew();
                 var pos = session.TextView.Caret.Position.BufferPosition;
                 var text = pos.Snapshot.GetText(0, pos.Position);
+                var fullText = pos.Snapshot.GetText();
                 _buffer.Properties.TryGetProperty("AssemblyName", out string assemblyName);
-                var completions = _engine.GetCompletions(metadata.CompletionMetadata, text, pos, assemblyName);
+                var completions = _engine.GetCompletions(metadata.CompletionMetadata, text, fullText, pos, assemblyName);
 
                 if (completions?.Completions.Count > 0)
                 {
